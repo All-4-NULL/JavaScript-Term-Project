@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Arcade - Game Hub</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <style>
+        /* Base Page Style */
+        body {
+            background-color: #0a0a0a;
+            /* Grid */
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: #fff;
+            font-family: 'Press Start 2P', cursive;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            position: relative; /* for scanlines */
+        }
+
+        /* ---SCANLINE EFFECT --- */
+        body::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            z-index: 999;
+            background-size: 100% 4px;
+            pointer-events: none; /* click through the lines */
+        }
+
+        /* Header + Title */
+        header {
+            margin-top: 50px;
+            margin-bottom: 30px;
+            z-index: 10;
+        }
+
+        h1 {
+            font-family: 'Monoton', cursive;
+            font-size: 4rem;
+            font-weight: normal;
+            margin: 0;
+            color: #fff;
+            text-shadow: 
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 20px #ff00ff,
+                0 0 40px #ff00ff,
+                0 0 80px #ff00ff;
+            animation: pulse 2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff00ff, 0 0 40px #ff00ff, 0 0 80px #ff00ff; }
+            to { text-shadow: 0 0 2px #fff, 0 0 5px #fff, 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #ff00ff; }
+        }
+
+        /* --- BLINKING TEXT (INSERT COIN) --- */
+        .insert-coin {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #ffff00;
+            text-shadow: 0 0 10px #ffff00;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* Containers for 3 Games */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .game-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1200px;
+            padding: 0 20px;
+        }
+
+        /* Game Signs */
+        .game-card {
+            background-color: #111;
+            border: 4px solid #fff;
+            border-radius: 15px;
+            padding: 40px 20px;
+            width: 250px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.1s ease-in-out; /* speed of transition */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.5;
+            position: relative;
+            top: 0;
+        }
+
+        .game-card span {
+            font-size: 0.7rem;
+            margin-top: 15px;
+            opacity: 0.7;
+        }
+
+        /* --- Button Push Effect --- */
+        .game-card:active {
+            top: 5px; /* button push down */
+            box-shadow: 0 0 5px inset !important; /* Stopsouter glow when pressed */
+        }
+
+        /* Game 1: Propeller pilot (Cyan) */
+        .game-card.cyan {
+            border-color: #00ffff;
+            box-shadow: 0 0 10px #00ffff, inset 0 0 10px #00ffff;
+            text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+        }
+        .game-card.cyan:hover {
+            background-color: #00ffff;
+            color: #000;
+            box-shadow: 0 0 30px #00ffff, inset 0 0 20px #00ffff;
+            text-shadow: none;
+            transform: scale(1.05); 
+        }
+
+        /* Game 2: go fish (Green) */
+        .game-card.green {
+            border-color: #39ff14;
+            box-shadow: 0 0 10px #39ff14, inset 0 0 10px #39ff14;
+            text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14;
+        }
+        .game-card.green:hover {
+            background-color: #39ff14;
+            color: #000;
+            box-shadow: 0 0 30px #39ff14, inset 0 0 20px #39ff14;
+            text-shadow: none;
+            transform: scale(1.05);
+        }
+
+        /* Game 3: checkers (Hot Pink) */
+        .game-card.pink {
+            border-color: #ff007f;
+            box-shadow: 0 0 10px #ff007f, inset 0 0 10px #ff007f;
+            text-shadow: 0 0 5px #ff007f, 0 0 10px #ff007f;
+        }
+        .game-card.pink:hover {
+            background-color: #ff007f;
+            color: #000;
+            box-shadow: 0 0 30px #ff007f, inset 0 0 20px #ff007f;
+            text-shadow: none;
+            transform: scale(1.05);
+        }
+
+        /* Footer Style */
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 0.6rem;
+            color: #888;
+            z-index: 10;
+        }
+
+        footer a {
+            color: #00ffff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+            color: #ff007f;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>THE ARCADE</h1>
+        <div class="insert-coin">INSERT COIN TO CONTINUE</div>
+    </header>
+
+    <main>
+        <div class="game-container">
+            <a href="propeller-pilot.html" class="game-card cyan">
+                PROPELLER PILOT
+                <span>HTML5 Canvas</span>
+            </a>
+
+            <a href="go-fish.html" class="game-card green">
+                GO FISH
+                <span>jQuery Card Game</span>
+            </a>
+
+            <a href="checkers.html" class="game-card pink">
+                CHECKERS
+                <span>JS Arrays & Events</span>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Thais Grays. <a href="readme.txt">View Readme</a></p>
+    </footer>
+
+</body>
+</html>
