@@ -1,0 +1,111 @@
+/* Base Styles & Color Scheme */
+:root {
+    --bg-color: #1a1a2e;
+    --text-color: #e94560;
+    --card-bg: #16213e;
+    --accent: #0f3460;
+    --btn-hover: #e94560;
+    --btn-text: #fff;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-color);
+}
+
+/* Layout for Main Menu */
+.game-menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1000px;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    padding: 20px;
+    width: 280px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.card h2 {
+    color: var(--text-color);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    background-color: var(--accent);
+    color: var(--btn-text);
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--btn-hover);
+}
+
+/* Game Info Areas */
+.game-info {
+    max-width: 800px;
+    background-color: var(--card-bg);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Propeller Pilot Canvas */
+.canvas-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+canvas {
+    background-color: #87CEEB; /* Sky blue */
+    border: 3px solid var(--accent);
+    max-width: 100%;
+}
+
+/* Checkers Grid */
+.checkers-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 50px);
+    grid-template-rows: repeat(8, 50px);
+    border: 4px solid #333;
+    margin: 0 auto;
+}
+
+
+/* Grid Details */
+@media (max-width: 600px) {
+    .card {
+        width: 100%;
+    }
+    .checkers-grid {
+        grid-template-columns: repeat(8, 40px);
+        grid-template-rows: repeat(8, 40px);
+    }
+}
