@@ -27,6 +27,15 @@
         }
 
         /* Header & Titles */
+        main {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
         header {
             margin-bottom: 20px;
         }
@@ -96,10 +105,29 @@
 
         .hand-area h3 {
             font-size: 0.8rem;
-            color: #39ff14;
             margin-top: 0;
             margin-bottom: 15px;
             text-align: left;
+        }
+
+        .hand-player {
+            border-color: rgba(0, 255, 255, 0.35);
+            background-color: rgba(0, 255, 255, 0.04);
+        }
+
+        .hand-player h3 {
+            color: #00ffff;
+            text-shadow: 0 0 6px rgba(0, 255, 255, 0.6);
+        }
+
+        .hand-bot {
+            border-color: rgba(255, 0, 255, 0.35);
+            background-color: rgba(255, 0, 255, 0.06);
+        }
+
+        .hand-bot h3 {
+            color: #ff66ff;
+            text-shadow: 0 0 6px rgba(255, 0, 255, 0.6);
         }
 
         .cards-container {
@@ -139,23 +167,87 @@
             cursor: default;
         }
 
-        .card:not(.hidden):hover {
+        .hand-player .card:not(.hidden):hover {
             transform: translateY(-10px);
-            border-color: #39ff14;
-            box-shadow: 0 0 10px #39ff14;
+            border-color: #00ffff;
+            box-shadow: 0 0 10px #00ffff;
+        }
+
+        /* Turn banner */
+        .turn-banner {
+            width: 100%;
+            padding: 14px 16px;
+            box-sizing: border-box;
+            border-radius: 8px;
+            font-size: clamp(0.7rem, 2.2vw, 0.9rem);
+            letter-spacing: 0.06em;
+            border: 2px solid;
+            transition: background 0.25s, border-color 0.25s, color 0.25s, box-shadow 0.25s;
+        }
+
+        .turn-banner.player-turn {
+            background: rgba(0, 255, 255, 0.1);
+            border-color: #00ffff;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+            box-shadow: 0 0 14px rgba(0, 255, 255, 0.25), inset 0 0 20px rgba(0, 255, 255, 0.08);
+        }
+
+        .turn-banner.bot-turn {
+            background: rgba(255, 0, 255, 0.12);
+            border-color: #ff00ff;
+            color: #ff66ff;
+            text-shadow: 0 0 10px #ff00ff;
+            box-shadow: 0 0 14px rgba(255, 0, 255, 0.3), inset 0 0 20px rgba(255, 0, 255, 0.1);
+        }
+
+        .turn-banner.game-over {
+            background: rgba(255, 200, 60, 0.12);
+            border-color: #ffcc33;
+            color: #ffdd66;
+            text-shadow: 0 0 10px #ffcc33;
+            box-shadow: 0 0 14px rgba(255, 200, 60, 0.25), inset 0 0 20px rgba(255, 200, 60, 0.08);
         }
 
         /* Message Center */
         .message-center {
             width: 100%;
-            background-color: #000;
-            border: 2px solid #39ff14;
+            background-color: #080808;
+            border: 2px solid #333;
             padding: 15px;
             box-sizing: border-box;
-            color: #39ff14;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            text-shadow: 0 0 5px #39ff14;
+            font-size: 0.85rem;
+            line-height: 1.55;
+            min-height: 7.5rem;
+            text-align: left;
+        }
+
+        .message-center .msg-line {
+            margin: 0.35em 0;
+        }
+
+        .msg-neutral {
+            color: #bbb;
+        }
+
+        .msg-player {
+            color: #00ffff;
+            text-shadow: 0 0 6px rgba(0, 255, 255, 0.45);
+        }
+
+        .msg-bot {
+            color: #ff66ff;
+            text-shadow: 0 0 6px rgba(255, 0, 255, 0.5);
+        }
+
+        .msg-give {
+            color: #ffaa44;
+            text-shadow: 0 0 6px rgba(255, 140, 50, 0.55);
+        }
+
+        .msg-take {
+            color: #88ff44;
+            text-shadow: 0 0 6px rgba(130, 255, 60, 0.45);
         }
 
         /* Neon Buttons */
@@ -163,15 +255,18 @@
             background-color: transparent;
             color: #fff;
             font-family: 'Press Start 2P', cursive;
-            font-size: 0.8rem;
+            font-size: clamp(0.65rem, 1.85vw, 0.75rem);
             border: 2px solid #39ff14;
-            padding: 15px 20px;
+            padding: 14px 16px;
             border-radius: 8px;
             cursor: pointer;
             text-decoration: none;
             transition: all 0.3s ease;
             box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
-            margin-top: 10px;
+            margin: 0;
+            box-sizing: border-box;
+            line-height: 1.35;
+            text-align: center;
         }
 
         .btn:hover {
@@ -180,8 +275,45 @@
             box-shadow: 0 0 20px #39ff14;
         }
 
+        .cabinet-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            gap: 12px;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .cabinet-actions .btn {
+            flex: 1 1 240px;
+            min-width: min(100%, 200px);
+            max-width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 3.25rem;
+        }
+
+        .btn-lang {
+            border-color: #ff00ff;
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+        }
+
+        .btn-lang:hover {
+            background-color: #ff00ff;
+            color: #000;
+            box-shadow: 0 0 20px #ff00ff;
+        }
+
         .btn-return {
-            margin-top: 40px;
+            margin-top: 28px;
+            max-width: min(100%, 900px);
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             border-color: #ff00ff;
             box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
         }
@@ -211,7 +343,7 @@
                  PLAYER SCORE: <span id="p-score">0</span> | MAINFRAME SCORE: <span id="ai-score">0</span>
             </div>
             
-            <div class="hand-area" id="ai-area">
+            <div class="hand-area hand-bot" id="ai-area">
                 <h3>MAINFRAME AI</h3>
                 <div class="cards-container">
                     <div class="card hidden"></div>
@@ -222,12 +354,13 @@
                 </div>
             </div>
 
-            <div class="message-center" id="game-messages">
-                <p>> SYSTEM READY.</p>
-                <p>> WAITING FOR PLAYER TO SELECT A CARD...</p>
+            <div class="turn-banner player-turn" id="turn-banner" aria-live="polite">
+                <span id="turn-banner-text">YOUR TURN</span>
             </div>
 
-            <div class="hand-area" id="player-area">
+            <div class="message-center" id="game-messages"></div>
+
+            <div class="hand-area hand-player" id="player-area">
                 <h3>YOUR HAND</h3>
                 <div class="cards-container">
                     <div class="card">A</div>
@@ -238,14 +371,15 @@
                 </div>
             </div>
 
-            <button id="dealBtn" class="btn">DEAL NEW HAND</button>
-        <button id="langBtn" class="btn" style="border-color: #ff00ff; box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);">TOGGLE JAPANESE (日本語)</button>
+            <div class="cabinet-actions">
+                <button type="button" id="dealBtn" class="btn">DEAL NEW HAND</button>
+                <button type="button" id="langBtn" class="btn btn-lang">TOGGLE JAPANESE (日本語)</button>
+            </div>
         </section>
 
         <a href="index.html" class="btn btn-return">RETURN TO MENU</a>
     </main>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="js/gofish.js"></script>
 </body>
 </html>

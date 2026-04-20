@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Press+Start+2P&display=swap" rel="stylesheet">
 
     <style>
-        /* Base Page Style */
+        /* Base Style */
         body {
             background-color: #0a0a0a;
             background-image: 
@@ -24,6 +24,15 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+        }
+
+        main {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
         }
 
         /* Header and Titles */
@@ -69,7 +78,7 @@
             margin: 0;
         }
 
-        /* Game Interface Area */
+        /* Interface Area */
         .arcade-cabinet {
             display: flex;
             flex-direction: column;
@@ -80,7 +89,9 @@
             border-radius: 15px;
             box-shadow: 0 0 20px #ff007f, inset 0 0 15px rgba(255, 0, 127, 0.2);
             width: 100%;
-            max-width: 600px;
+            max-width: 900px;
+            gap: 20px;
+            box-sizing: border-box;
         }
 
         /* --- CSS GRID CHECKERS BOARD --- */
@@ -111,7 +122,7 @@
 
         .square.light {
             background-color: #ff007f;
-            opacity: 0.3; /
+            opacity: 0.3;
         }
 
         /* Checkers Pieces */
@@ -142,20 +153,11 @@
             box-shadow: 0 0 10px #ff00ff, inset 0 0 5px #fff;
         }
 
-        /* UI Panel */
-        .ui-panel {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            max-width: 400px;
-            margin-top: 20px;
-        }
-
         .turn-indicator {
-            font-size: 1rem;
+            font-size: clamp(0.65rem, 1.85vw, 0.85rem);
             color: #00ffff;
             text-shadow: 0 0 5px #00ffff;
+            line-height: 1.35;
         }
 
         /* Neon Buttons */
@@ -163,14 +165,18 @@
             background-color: transparent;
             color: #fff;
             font-family: 'Press Start 2P', cursive;
-            font-size: 0.8rem;
+            font-size: clamp(0.65rem, 1.85vw, 0.75rem);
             border: 2px solid #ff007f;
-            padding: 15px 20px;
+            padding: 14px 16px;
             border-radius: 8px;
             cursor: pointer;
             text-decoration: none;
             transition: all 0.3s ease;
             box-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
+            margin: 0;
+            box-sizing: border-box;
+            line-height: 1.35;
+            text-align: center;
         }
 
         .btn:hover {
@@ -179,8 +185,45 @@
             box-shadow: 0 0 20px #ff007f;
         }
 
+        .cabinet-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            gap: 12px;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .cabinet-actions .btn {
+            flex: 1 1 240px;
+            min-width: min(100%, 200px);
+            max-width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 3.25rem;
+        }
+
+        .cabinet-actions .turn-indicator {
+            flex: 1 1 240px;
+            min-width: min(100%, 200px);
+            max-width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 3.25rem;
+            text-align: center;
+        }
+
         .btn-return {
-            margin-top: 40px;
+            margin-top: 28px;
+            max-width: min(100%, 900px);
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             border-color: #fff;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
@@ -242,14 +285,14 @@
                 <div class="square dark"><div class="piece player1"></div></div><div class="square light"></div><div class="square dark"><div class="piece player1"></div></div><div class="square light"></div><div class="square dark"><div class="piece player1"></div></div><div class="square light"></div><div class="square dark"><div class="piece player1"></div></div><div class="square light"></div>
             </div>
 
-            <div class="ui-panel">
+            <div class="cabinet-actions">
                 <div class="turn-indicator">> P1 TURN</div>
-                <button id="resetBtn" class="btn">RESET BOARD</button>
+                <button type="button" id="resetBtn" class="btn">RESET BOARD</button>
             </div>
         </section>
-        <br>
+
         <a href="index.html" class="btn btn-return">RETURN TO MENU</a>
     </main>
-       <script src="js/checkers.js"></script>
-    </body>
+    <script src="js/checkers.js"></script>
+</body>
 </html>

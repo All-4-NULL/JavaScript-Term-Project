@@ -26,6 +26,15 @@
             min-height: 100vh;
         }
 
+        main {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
         /* Header & Titles */
         header {
             margin-bottom: 20px;
@@ -45,7 +54,7 @@
                 0 0 80px #00ffff;
         }
 
-        /* Game Information Section (Required by Rubric) */
+        /* Game Information Section */
         .game-info {
             max-width: 800px;
             background-color: #111;
@@ -74,11 +83,15 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 100%;
+            max-width: 900px;
             background-color: #1a1a1a;
             padding: 20px;
             border: 3px solid #00ffff;
             border-radius: 15px;
             box-shadow: 0 0 20px #00ffff, inset 0 0 15px rgba(0, 255, 255, 0.2);
+            gap: 20px;
+            box-sizing: border-box;
         }
 
         /* The Canvas to draw the game */
@@ -90,18 +103,8 @@
             max-width: 100%;
         }
 
-        /* UI (Score and Buttons) */
-        .ui-panel {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            max-width: 800px;
-            margin-top: 20px;
-        }
-
         .score-board {
-            font-size: 1.2rem;
+            font-size: clamp(0.85rem, 2.5vw, 1.2rem);
             color: #00ffff;
             text-shadow: 0 0 5px #00ffff;
         }
@@ -111,14 +114,18 @@
             background-color: transparent;
             color: #fff;
             font-family: 'Press Start 2P', cursive;
-            font-size: 0.8rem;
+            font-size: clamp(0.65rem, 1.85vw, 0.75rem);
             border: 2px solid #00ffff;
-            padding: 15px 20px;
+            padding: 14px 16px;
             border-radius: 8px;
             cursor: pointer;
             text-decoration: none;
             transition: all 0.3s ease;
             box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            margin: 0;
+            box-sizing: border-box;
+            line-height: 1.35;
+            text-align: center;
         }
 
         .btn:hover {
@@ -127,8 +134,44 @@
             box-shadow: 0 0 20px #00ffff;
         }
 
+        .cabinet-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            gap: 12px;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .cabinet-actions .btn {
+            flex: 1 1 240px;
+            min-width: min(100%, 200px);
+            max-width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 3.25rem;
+        }
+
+        .cabinet-actions .score-board {
+            flex: 1 1 240px;
+            min-width: min(100%, 200px);
+            max-width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 3.25rem;
+        }
+
         .btn-return {
-            margin-top: 40px;
+            margin-top: 28px;
+            max-width: min(100%, 900px);
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             border-color: #ff00ff;
             box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
         }
@@ -149,7 +192,7 @@
     <main>
         <section class="game-info">
             <h2>MISSION BRIEFING</h2>
-            <p>Control your drone and navigate through gaps in a series of obstacles. Use the Spacebar to calculate upward thrust vectors and fight gravity. Avoid collisions at all costs!</p>
+            <p>Control your drone and navigate through gaps in a series of obstacles. Use the Spacebar to thrust upward  . Avoid collisions at all costs!</p>
         </section>
 
         <section class="arcade-cabinet">
@@ -157,13 +200,12 @@
                 Your browser does not support the HTML5 canvas tag.
             </canvas>
             
-            <div class="ui-panel">
+            <div class="cabinet-actions">
                 <div class="score-board">SCORE: <span id="score">0000</span></div>
-                <button id="thrustBtn" class="btn">THRUST</button>
+                <button type="button" id="thrustBtn" class="btn">THRUST</button>
             </div>
         </section>
-        <br>
-        <br>
+
         <a href="index.html" class="btn btn-return">RETURN TO MENU</a>
     </main>
     <script src="js/propeller.js"></script>

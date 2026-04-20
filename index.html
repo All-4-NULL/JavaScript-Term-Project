@@ -88,7 +88,12 @@
             flex: 1;
             display: flex;
             align-items: center;
+            justify-content: center;
             z-index: 10;
+            width: 100%;
+            max-width: 1200px;
+            box-sizing: border-box;
+            padding: 0 20px;
         }
 
         .game-container {
@@ -125,7 +130,7 @@
             opacity: 0.7;
         }
 
-        /* --- Button Push Effect --- */
+        /*  Button Push Effect  */
         .game-card:active {
             top: 5px; /* button push down */
             box-shadow: 0 0 5px inset !important; /* Stopsouter glow when pressed */
@@ -209,7 +214,7 @@
 
             <a href="go-fish.html" class="game-card green">
                 GO FISH
-                <span>jQuery Card Game</span>
+                <span>Vanilla JS Card Game</span>
             </a>
 
             <a href="checkers.html" class="game-card pink">
